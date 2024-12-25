@@ -17,6 +17,8 @@
     pkgs.jdk21_headless
     pkgs.jre8_headless
     pkgs.yarn
+    pkgs.gradle
+    pkgs.socat
     # pkgs.nodePackages.nodemon
   ];
 
@@ -26,22 +28,23 @@
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
     extensions = [
       # "vscodevim.vim"
+       "msjsdiag.vscode-react-native"
+      "fwcd.kotlin"
     ];
 
     # Enable previews
-    previews = {
+     previews = {
       enable = true;
       previews = {
         # web = {
-        #   # Example: run "npm run dev" with PORT set to IDX's defined port for previews,
-        #   # and show it in IDX's web preview panel
-        #   command = ["npm" "run" "dev"];
+        #   command = [ "npm" "run" "web" "--" "--port" "$PORT" ];
         #   manager = "web";
-        #   env = {
-        #     # Environment variables to set for your server
-        #     PORT = "$PORT";
-        #   };
         # };
+        android = {
+          # noop
+          command = [ "tail" "-f" "/dev/null" ];
+          manager = "web";
+        };
       };
     };
 
@@ -49,13 +52,24 @@
     workspace = {
       # Runs when a workspace is first created
       onCreate = {
-        # Example: install JS dependencies from NPM
-        # npm-install = "npm install";
+        install-and-prebuild = ''
+          npm ci --prefer-offline --no-audit --no-progress --timing 
+          # && npm i @expo/ngrok@^4.1.0 && npx -y expo install expo-dev-client && npx -y expo prebuild --platform android
+          # Add more memory to the JVM
+          sed -i 's/org.gradle.jvmargs=-Xmx2048m -XX:MaxMetaspaceSize=512m/org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=512m/' "cohesivemusic/android/gradle.properties"
+        '';
       };
-      # Runs when the workspace is (re)started
+      # Runs when a workspace restarted
       onStart = {
-        # Example: start a background task to watch and re-build backend code
-        # watch-backend = "npm run watch-backend";
+        forward-ports = ''
+          socat -d -d TCP-LISTEN:5554,reuseaddr,fork TCP:$(cat /etc/resolv.conf | tail -n1 | cut -d " " -f 2):5554
+        '';
+        connect-device = ''
+          adb -s localhost:5554 wait-for-device 
+        '';
+        android = ''
+          npm run android
+        '';
       };
     };
   };
