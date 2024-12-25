@@ -71,6 +71,7 @@ PODS:
   - hermes-engine (0.73.11):
     - hermes-engine/Pre-built (= 0.73.11)
   - hermes-engine/Pre-built (0.73.11)
+  - HMSegmentedControl (1.5.6)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
   - RCT-Folly (2022.05.16.00):
@@ -1111,6 +1112,19 @@ PODS:
     - React-jsi (= 0.73.11)
     - React-logger (= 0.73.11)
     - React-perflogger (= 0.73.11)
+  - ReactNativeNavigation (7.40.3):
+    - HMSegmentedControl
+    - React-Core
+    - React-CoreModules
+    - React-RCTImage
+    - React-RCTText
+    - ReactNativeNavigation/Core (= 7.40.3)
+  - ReactNativeNavigation/Core (7.40.3):
+    - HMSegmentedControl
+    - React-Core
+    - React-CoreModules
+    - React-RCTImage
+    - React-RCTText
   - SocketRocket (0.6.1)
   - Yoga (1.14.0)
 
@@ -1187,6 +1201,7 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - ReactNativeNavigation (from `../node_modules/react-native-navigation`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -1201,6 +1216,7 @@ SPEC REPOS:
     - Flipper-PeerTalk
     - FlipperKit
     - fmt
+    - HMSegmentedControl
     - libevent
     - OpenSSL-Universal
     - SocketRocket
@@ -1301,6 +1317,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/react/utils"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  ReactNativeNavigation:
+    :path: "../node_modules/react-native-navigation"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -1321,6 +1339,7 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: c5d68082e772fa1c511173d6b30a9de2c05a69a2
   hermes-engine: d992945b77c506e5164e6a9a77510c9d57472c59
+  HMSegmentedControl: 34c1f54d822d8308e7b24f5d901ec674dfa31352
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   RCT-Folly: 7169b2b1c44399c76a47b5deaaba715eeeb476c0
@@ -1364,6 +1383,7 @@ SPEC CHECKSUMS:
   React-runtimescheduler: a36193fd33a0187852d54d402e170510f1300952
   React-utils: eaaed6083fccd050a594baf1d72db5f949a3b9bb
   ReactCommon: 1a93f1ef5c6e33bf14b9563cdb8e7621a893aa37
+  ReactNativeNavigation: 9f83016cb7f44f9b4a4e86536c9813b29cf3aa9d
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: a813a6d82538ccba91c54406404e3ed80b48a692
 
